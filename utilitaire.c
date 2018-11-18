@@ -1,3 +1,7 @@
+/*
+PROJET
+2018
+*/
 #include "utilitaire.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -5,19 +9,19 @@
 #include <ctype.h>
 #include <unistd.h>
 
+//Initialisation de voitures
 void init(int i, int number)
 {
-	cars[i].number = number;    //Number of the car
-	cars[i].bestCircuit=0;  //Best time on a circuit lap
-	cars[i].bestS1=0;       //Best time on the first sector
-	cars[i].bestS2=0;       //Best time on the second sector
-	cars[i].bestS3=0;       //Best time on the third sector
-	//cars[i].numCircuit=0;   //Number of laps already done
-	cars[i].currTime=0;     //Time elapsed since the start of the race
-	cars[i].currCircuit=0;  //Current time of the race
-	cars[i].standTime=0;      /*number of times it has passed the stand (between 1 and 3) */
-	/*takes between 22 and 27 seconds */
-	cars[i].isOut=0;        //0 if the car still run, 1 if it's crash
+	cars[i].number = number;    //numéro de la voiture
+	cars[i].bestCircuit=0;  //Meilleur temps du tour
+	cars[i].bestS1=0;       //Meilleur temps du secteur 1
+	cars[i].bestS2=0;       //Meilleur temps du secteur 2
+	cars[i].bestS3=0;       //Meilleur temps du secteur 3
+	cars[i].currTime=0;     //Temps lancé depuis le début de la course
+	cars[i].currCircuit=0;  //Temps actuel de la course //PAS BESOIN ?
+	cars[i].nbrOfStands=0;      /*nombre de fois de passage au stand (entre 1 et 3) */
+	/*prend entre 22 et 27 secondes */
+	cars[i].isOut=0;        //retourne 1 si crash
 
 	if(i<10)
 	{
@@ -26,20 +30,18 @@ void init(int i, int number)
 		carsQualif2[i].bestS1=0;
 		carsQualif2[i].bestS2=0;
 		carsQualif2[i].bestS3=0;
-		//carsQualif2[i].numCircuit=0;
 		carsQualif2[i].currTime=0;
 		carsQualif2[i].currCircuit=0;
-		carsQualif2[i].standTime=0;
+		carsQualif2[i].nbrOfStands=0;
 		carsQualif2[i].isOut=0;
 		carsQualif3[i].number=0;
 		carsQualif3[i].bestCircuit=0;
 		carsQualif3[i].bestS1=0;
 		carsQualif3[i].bestS2=0;
 		carsQualif3[i].bestS3=0;
-		//carsQualif3[i].numCircuit=0;
 		carsQualif3[i].currTime=0;
 		carsQualif3[i].currCircuit=0;
-		carsQualif3[i].standTime=0;
+		carsQualif3[i].nbrOfStands=0;
 		carsQualif3[i].isOut=0;
 	}
 	if(i>=10 && i< 15)
@@ -49,30 +51,28 @@ void init(int i, int number)
 		carsQualif2[i].bestS1=0;
 		carsQualif2[i].bestS2=0;
 		carsQualif2[i].bestS3=0;
-		//carsQualif2[i].numCircuit=0;
 		carsQualif2[i].currTime=0;
 		carsQualif2[i].currCircuit=0;
-		carsQualif2[i].standTime=0;
+		carsQualif2[i].nbrOfStands=0;
 		carsQualif2[i].isOut=0;
 	}
 }
 
-//reset car's scores indexed by i
+//initialise le score de la voiture (index i)
 void reset(int i)
 {
 	cars[i].bestCircuit=0;
 	cars[i].bestS1=0;
 	cars[i].bestS2=0;
 	cars[i].bestS3=0;
-	//cars[i].numCircuit=0;
 	cars[i].currTime=0;
 	cars[i].currCircuit=0;
-	cars[i].standTime=0;
+	cars[i].nbrOfStands=0;
 	cars[i].isOut=0;
 }
 
 
-//RANDOM
+//RANDOM fonction
 int generateRandom(int min_number, int max_number)
 {
     srand(time(NULL));
@@ -82,22 +82,22 @@ int generateRandom(int min_number, int max_number)
 
 }
 
-//PITSTOP
+//PITSTOP le temps de passage au le pitstop
 int pitStop(int i)
 {
-	int timeStop = 0; //time spent at the pit
+	int timeStop = 0; //temps passé dedans
 
-	// 15% chance of a pit stop
+	// 15% de chance d'entrer dans le pitStop
 	if (generateRandom(0, 99) > 84)
     {
-		cars[i].standTime ++; //increment the pit stop number for the specified car
+		cars[i].nbrOfStands ++; //incrémente le nombre de pitStops pour la voiture concernée
 		timeStop += (generateRandom(24, 40)/10.0);
 	}
 
-	// obligation to stop at the pit at least one time during the race
-	if (cars[i].standTime == 0 && cars[i].numCircuit == nbrLapMax)
+	// obligation de s'arêter au moins une fois dans le pitStop
+	if (cars[i].nbrOfStands == 0 && cars[i].numCircuit == nbrLapMax)
     {
-		cars[i].standTime ++; //Increment the number of the pit stop for the specified car
+		cars[i].nbrOfStands ++; //incrémente le nombre de pitStops pour la voiture concernée
 		timeStop += (generateRandom(24, 40)/10.0);
 	}
 
@@ -107,7 +107,7 @@ int pitStop(int i)
 //CRASH
 void crash(int index)
 {	//0 = no crash
-	if (generateRandom(0, 999) > 996) // 5% chance of crash
+	if (generateRandom(0, 999) > 996) // 5% chance de crash
     {
 		cars[index].isOut = 1; //1=crash
 	}
@@ -134,15 +134,15 @@ void addTimeByPosition()
 	{
 		for(int i = 0; i < 20; i++)
 		{
-			if (cars[i].name == startPosition[j]){   // add time by position compared to the first
-				cars[i].currTime += j * 0.3;      //  to general time
-				cars[i].currCircuit = j * 0.3;   // to time on a lap
+			if (cars[i].name == startPosition[j]){   // ajoute le temps par rapport à la position du premier
+				cars[i].currTime += j * 0.3;      //  au temps général
+				cars[i].currCircuit = j * 0.3;   // au temps du tour ////////////////////////////////////////effacer=>voir s'il existe autre part (norm non)
 			}
 		}
 	}
 }
 
-//LES VOITURES DISQUALIFIE SONT "SUPPRIMER"
+//LES VOITURES DISQUALIFIEES SONT "SUPPRIMEES"
 void setOut(int q)
 {
 	if(q==2)
@@ -150,7 +150,7 @@ void setOut(int q)
 		for(int i=0; i<20; i++)
 		{
 			int j = isIn(cars[i].name, 15, carsQualif2);
-			//if the car isn't in carsQuelif2, we disqualify it
+			//si la voiture n'est pas dans carsQualif2, on la disqualifie
 			if(j==0)
 			{
 				cars[i].isOut=1;
@@ -162,7 +162,7 @@ void setOut(int q)
 		for(int i=0; i<20; i++)
 		{
 			int j = isIn(cars[i].name, 10, carsQualif3);
-			//if the car isn't in carsQuelif3, we disqualify it
+			//si la voiture n'est pas dans carsQualif3, on la disqualifie
 			if(j==0)
 			{
 				cars[i].isOut=1;
