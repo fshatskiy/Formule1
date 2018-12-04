@@ -9,7 +9,7 @@ PROJET
 
 
 
-double timeQualif1 = 1080; //??????????????
+double timeQualif1 = 1080; //1080/60 = 18 min 
 double timeQualif2 = 900;
 double timeQualif3 = 720;
 

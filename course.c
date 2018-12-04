@@ -1,4 +1,5 @@
 /*
+fct par rapport au nb de tours
 PROJET
 2018 raceWE
 */
@@ -21,4 +22,8 @@ PROJET
 
 
 //INITIALISATION DES VOITURES
-int c[20] = {44,77,3,33,5,7,11,31,19,18,14,2,10,55,8,20,27,30,9,94};
+//int c[20] = {44,77,3,33,5,7,11,31,19,18,14,2,10,55,8,20,27,30,9,94};
+
+int main (){
+	
+}

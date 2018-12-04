@@ -17,8 +17,8 @@ void init(int i, int number)
 	cars[i].bestS1=0;       //Meilleur temps du secteur 1
 	cars[i].bestS2=0;       //Meilleur temps du secteur 2
 	cars[i].bestS3=0;       //Meilleur temps du secteur 3
-	cars[i].currTime=0;     //Temps lancé depuis le début de la course
-	cars[i].currCircuit=0;  //Temps actuel de la course //PAS BESOIN ?
+	cars[i].currTime=0;     //Temps pour le total de la course
+	cars[i].currCircuit=0;  //Temps POUR UN TOUR
 	cars[i].nbrOfStands=0;      /*nombre de fois de passage au stand (entre 1 et 3) */
 	/*prend entre 22 et 27 secondes */
 	cars[i].isOut=0;        //retourne 1 si crash
@@ -130,11 +130,11 @@ double getCurrTime()
 //AJOUTE LE TEMPS EN FONCTION DE LA POSITION
 void addTimeByPosition()
 {
-	for (int j = 0; j < 20; j++)
+	for (int j = 0; j < 20; j++)//j = position grille de départ
 	{
-		for(int i = 0; i < 20; i++)
+		for(int i = 0; i < 20; i++)//i= index dans le tableau de voiture
 		{
-			if (cars[i].name == startPosition[j]){   // ajoute le temps par rapport à la position du premier
+			if (cars[i].number == startPosition[j]){   // ajoute le temps par rapport à la position du premier
 				cars[i].currTime += j * 0.3;      //  au temps général
 				cars[i].currCircuit = j * 0.3;   // au temps du tour ////////////////////////////////////////effacer=>voir s'il existe autre part (norm non)
 			}
@@ -149,7 +149,7 @@ void setOut(int q)
 	{
 		for(int i=0; i<20; i++)
 		{
-			int j = isIn(cars[i].name, 15, carsQualif2);
+			int j = isIn(cars[i].number, 15, carsQualif2);
 			//si la voiture n'est pas dans carsQualif2, on la disqualifie
 			if(j==0)
 			{
@@ -161,7 +161,7 @@ void setOut(int q)
 	{
 		for(int i=0; i<20; i++)
 		{
-			int j = isIn(cars[i].name, 10, carsQualif3);
+			int j = isIn(cars[i].number, 10, carsQualif3);
 			//si la voiture n'est pas dans carsQualif3, on la disqualifie
 			if(j==0)
 			{

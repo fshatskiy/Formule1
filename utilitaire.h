@@ -54,9 +54,9 @@ int pitStop(int i);
 void crash(int index);
 
 /*
- * Retourne le temps de chaque voiture 							????
+ * Retourne le temps de chaque voiture 							
  * @pre : structCar *cars existe
- * @post : retourne le temps max "currentTime" des voitures				????
+ * @post : retourne le temps max "currentTime" des voitures				
  */
 double getCurrTime();
 
