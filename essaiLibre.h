@@ -6,15 +6,12 @@ PROJET
 #define ESSAILIBRE_H
 #include "utilitaire.h"
 
-
-
-
-/*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
- * Runs the practice on a car situated at cars[index]
- * @pre : index of a car, p==1 || p==2 || p==3 ---> p = essais
- * @post : modify the values in the car structure
+/*
+ * Lance l'essai sur la voiture située dans cars[index]
+ * @pre : index de la car, essai==1 || essai==2 || essai==3 ---> essais
+ * @post : modifie les valeurs de la strucutre car
  */
-void practice(int index, int p);
+void practice(int index, int essai);
 
 /*
  * Crée le récapitulatif de l'essai libre
