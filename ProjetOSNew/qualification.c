@@ -4,25 +4,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-double timeQualif1 = 1080;
-double timeQualif2 = 900;
-double timeQualif3 = 720;
+double timeQualif1 = 1080;//1080/60 = 18 min
+double timeQualif2 = 900;//15 min
+double timeQualif3 = 720;//12 min
 
+//Tri de voitures
 void sortCars(structCar carsQualif[], int sizeArrayCars)
 {
 	int i=0;
 	structCar tmpCar;
 	int j = 0;
-	
+	//Compare les voitures entre elles (1 avec 1, 1 avec 2, etc)
 	for(i=0; i < sizeArrayCars; i++)
-		//Fill the case i of the array
+		//Remplit le i du tableau /////////////////////////////////// ?? 
 	{
 		for(j = i+1; j < sizeArrayCars; j++)
-			//Check if there are not smaller number in the next cases
+			//Vérifie s'il n'y a pas de nb plus petits dans le cas suivant   PQ
 		{
 			if(carsQualif[j].bestCircuit < carsQualif[i].bestCircuit)
 			{
-				//If it's true, swap number
+				//Si vrai, switch les nombres
 				tmpCar = carsQualif[i];
 				carsQualif[i] = carsQualif[j];
 				carsQualif[j] = tmpCar;
@@ -33,7 +34,7 @@ void sortCars(structCar carsQualif[], int sizeArrayCars)
 
 void buildStartPosition(structCar carsQualif[], int q)
 {
-	//fixing the limits of our loops according to the parameters
+	//fixe les limites des boucles en fonction des paramètres
 	int loop = 0;
 	int startArray = 0;
 	int loop2 = 0;
@@ -58,7 +59,7 @@ void buildStartPosition(structCar carsQualif[], int q)
 		startArray = 0;
 	}
 	
-	//here we fill our arrays of starting lists (next qualif and race)
+	//Remplissage des tableaux de listes de départ (prochain qualif et course)
 	for(int i=startArray; i < loop; i++)
 	{
 		startPosition[i] = carsQualif[i].name;
@@ -85,7 +86,7 @@ void qualif(int index, int q)
 	id_sem = semop(id_sem, &semPost, 1);
 	double timeQualif = 0.0;
 	
-	//we determine the duration of the practice
+	//determine la durée de l'essai
 	if(q==1)
 	{
 		timeQualif = timeQualif1;
@@ -99,12 +100,12 @@ void qualif(int index, int q)
 		timeQualif = timeQualif3;
 	}
 	
-	//we loop until the time runs out or the car is out
+	//boucle jusqu'à ce que le temps soit écoulé ou que la voiture ait abandonné
 	while(time<timeQualif && cars[index].isOut == 0)
 	{
 		generateTimeS1(index);
 		
-		//if the car has a better time for S1 than all the others we update the global variable
+		//si la voiture a un meilleur temps pour S1 que toutes les autres, mise à jour de la variable globale
 		if(cars[index].bestS1<smv[7])
 		{
 			id_sem = semop(id_sem, &semWait1, 1);
@@ -114,7 +115,7 @@ void qualif(int index, int q)
 		}
 		generateTimeS2(index);
 		
-		//if the car has a better time for S2 than all the others we update the global variable
+		//si la voiture a un meilleur temps pour S2 que toutes les autres, mise à jour de la variable globale
 		if(cars[index].bestS2<smv[8])
 		{
 			id_sem = semop(id_sem, &semWait1, 1);
@@ -124,7 +125,7 @@ void qualif(int index, int q)
 		}
 		generateTimeS3(index);
 		
-		//if the car has a better time for S3 than all the others we update the global variable
+		//si la voiture a un meilleur temps pour S3 que toutes les autres, mise à jour de la variable globale
 		if(cars[index].bestS3<smv[9])
 		{
 			id_sem = semop(id_sem, &semWait1, 1);
@@ -132,8 +133,7 @@ void qualif(int index, int q)
 			smv[9] = cars[index].bestS3;
 			id_sem = semop(id_sem, &semPost1, 1);
 		}
-		//if the car has a better time for the circuit than all the others we update
-		//the global variable
+		//si la voiture a un meilleur temps du circuit que toutes les autres, mise à jour de la variable globale
 		if(cars[index].bestCircuit<smv[10])
 		{
 			id_sem = semop(id_sem, &semWait1, 1);
@@ -141,14 +141,14 @@ void qualif(int index, int q)
 			smv[10] = cars[index].bestCircuit;
 			id_sem = semop(id_sem, &semPost1, 1);
 		}
-		//we update the global current time of the race
+		// mise à jour de l'heure actuelle de la course
 		id_sem = semop(id_sem, &semWait, 1);
 		id_sem = semop(id_sem, &semDo, 1);
 		time = getCurrTime();
 		id_sem = semop(id_sem, &semPost, 1);
 	}
-	//here we update the value of smv[3], [4] or [5], this signals to the parent process that
-	//the car has finished its qualification run.
+	//Ici, mise à jour de la valeur de smv [3], [4] ou [5], 
+	//indique au processus parent que la voiture a terminé son cycle de qualification.
 	if(q==1)
 	{
 		id_sem = semop(id_sem, &semWait1, 1);
@@ -194,8 +194,8 @@ void generateRecapFileQualif()
 		printf("Ouverture du fichier recap impossible");
 	}
 	
-	//after having saved the values in a file we reset them to zero, the cars will restart
-	//the next practice with a clean slate
+	//après avoir sauvegardé les valeurs dans un fichier,
+	//on les réinitialise à zéro, les voitures reprendront le prochain essai avec une table vide.
 	
 	for(int i=0; i<20; i++)
 	{
