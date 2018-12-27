@@ -1,6 +1,6 @@
 #include "voiture.h"
 #include "utilitaire.h"
-#include "race.h"
+#include "course.h"
 #include <stdio.h>
 #include <stdlib.h>
 
