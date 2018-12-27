@@ -1,6 +1,6 @@
-n#include "voiture.h"
+neemn#include "voiture.h"
 #include "utilitaire.h"
-#include "practice.h"
+#include "entrainement.h"
 #include "qualification.h"
 #include "race.h"
 #include <stdio.h>
