@@ -2,7 +2,7 @@ neemn#include "voiture.h"
 #include "utilitaire.h"
 #include "entrainement.h"
 #include "qualification.h"
-#include "race.h"
+#include "course.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
