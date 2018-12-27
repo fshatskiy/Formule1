@@ -4,30 +4,30 @@
 #include "voiture.h"
 
 /*
- * Sort the table cars on the base of bestCircuit
+ * Trie la table de voitures du base de bestCircuit
  * @pre : carsQualif not null, sizeArrayCars==20 || sizeArrayCars==15 || sizeArrayCars==10
- * @post : modify the carsQualif
+ * @post : modification de carsQualif
  */
 void sortCars(structCar carsQualif[], int sizeArrayCars);
 
 /*
- * Build the start grid
+ * Construction de la grille de départ
  * @pre : carsQualif not null, q==1 || q==2 || q==3
- * @post : modify the startPosition variable
+ * @post : modification de la var startPosition
  */
 void buildStartPosition(structCar carsQualif[], int q);
 
 /*
- * Runs the qualif on a car
+ * Lance la qualif sur une voiture
  * @pre : car referenced by the index is not null, q==1 || q==2 || q==3
- * @post : modify the values in the car structure
+ * @post : modification des valeurs dans la structure de la voiture
  */
 void qualif(int index, int q);
 
 /*
- * Creates the file with the recap of the qualif
- * @pre :
- * @post : creates a file with all the infos needed
+ * Création du fichier avec le récapitulatif du qualif
+ * @pre : /
+ * @post : création du fichier avec toutes les informations nécessaires
  */
 void generateRecapFileQualif();
 
