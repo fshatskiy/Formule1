@@ -243,7 +243,7 @@ void worker(int nprocesses)
 		//demander à l'utilisateur si il veut continuer : si oui smv[5]=0 sinon tuer tout les enfants
 		//and exit program
 		interaction(5);
-		//start of race
+		//debut de la course
 		wakeChildren();
 		//here we add time to cars with regard to startPosition
 		addTimeByPosition();
@@ -292,7 +292,7 @@ void worker(int nprocesses)
 			//that time delay was determined experimentally
 			sleep(1);
 			
-			//start of practice 1
+			//debut du practice  1 (entrainement 1?)
 			int index;
 			
 			//We determine which car belongs to which process
@@ -310,26 +310,27 @@ void worker(int nprocesses)
 				perror("pid not in pidList\n");
 				exit(EXIT_FAILURE);
 			}
+		
 			practice(index-1, 1);
-			//waits for the others to finish and for the parent process to finish printing the
+			//attends que les autres ait fini et que les processus parents aient fini (d'imprimer 'd'ecrire) 
 			//le fichier recap;
 			while(smv[0]!=0)
 			{
 				sleep(1);
 			}
 			
-			//start of practice 2
+			//debut du practice 2 (entrainement 2?)
 			practice(index-1, 2);
-			//waits for the others to finish and for the parent process to finish printing the
+			//attends que les autres ait fini et que les processus parents aient fini (d'imprimer 'd'ecrire) 
 			//le fichier recap;
 			while(smv[1]!=0)
 			{
 				sleep(1);
 			}
 			
-			//start of practice 3
+			//debut du practice 3 (entrainement 3?)
 			practice(index-1, 3);
-			//waits for the others to finish and for the parent process to finish printing the
+			//attends que les autres ait fini et que les processus parents aient fini (d'imprimer 'd'ecrire) 
 			//le fichier recap;
 			while(smv[2]!=0)
 			{
@@ -347,8 +348,8 @@ void worker(int nprocesses)
 			
 			//Debut des qualif 2
 			qualif(index-1, 2);
-			//waits for the others to finish and for the parent process to finish printing the
-			//le fichier recap;
+			//attends que les autres ait fini et que les processus parents aient fini (d'imprimer 'd'ecrire) 
+			//le fichier recap; 
 			while(smv[4]!=0)
 			{
 				sleep(1);
@@ -356,7 +357,7 @@ void worker(int nprocesses)
 			
 			//Debut des qualif 3
 			qualif(index-1, 3);
-			//waits for the others to finish and for the parent process to finish printing the
+			//attends que les autres ait fini et que les processus parents aient fini (d'imprimer 'd'ecrire) 
 			//le fichier recap;
 			while(smv[5]!=0)
 			{
