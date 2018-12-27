@@ -15,18 +15,18 @@ void sortCarsByCurrTime(structCar carsRace[])
 		//Remplis les cases i du tableau
 	{
 		for(j = i+1; j < 20; j++)
-			//Check if there are not smaller number in the next cases
+			//verifie si il y a pas de numéro plus petit dans les case suivantes
 		{
 			if(carsRace[j].numCircuit == carsRace[i].numCircuit && carsRace[j].currTime < carsRace[i].currTime)
 			{
-				//If it's true, swap number
+				//Si c'est vrai, echange le numero
 				tmpCar = carsRace[i];
 				carsRace[i] = carsRace[j];
 				carsRace[j] = tmpCar;
 			}
 			else if(carsRace[j].numCircuit > carsRace[i].numCircuit)
 			{
-				//Si c'est vrai, echange le numero 
+				//Sinon si c'st plus petit, echange le numero 
 				tmpCar = carsRace[i];
 				carsRace[i] = carsRace[j];
 				carsRace[j] = tmpCar;
