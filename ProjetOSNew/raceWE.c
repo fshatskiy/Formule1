@@ -88,7 +88,7 @@ void worker(int nprocesses)
 		semop(id_sem, &semPost, 1);
 		
 		//demander à l'utilisateur si il veut continuer : si oui smv[1]=0 sinon tuer tout les enfants
-		//and exit program
+		//et quiter le programme
 		interaction(1);
 		
 		
@@ -120,7 +120,7 @@ void worker(int nprocesses)
 		semop(id_sem, &semPost, 1);
 		
 		//demander à l'utilisateur si il veut continuer : si oui smv[2]=0 sinon tuer tout les enfants
-		//and exit program
+		//et quiter le programme
 		interaction(2);
 		
 		//Debut des qualif 1
@@ -143,7 +143,7 @@ void worker(int nprocesses)
 			}
 			sleep(1);
 		}
-		//creating a temporary variable that holds car, sorting it and building the starting list
+		//creation d'une variable temporaire qui contient les voitures, en les triant et en les mettant dans la liste des départs. (starting list)
 		id_sem = semop(id_sem, &semWait, 1);
 		id_sem = semop(id_sem, &semDo, 1);
 		for(int i =0; i<20; i++)
@@ -161,14 +161,14 @@ void worker(int nprocesses)
 		generateRecapFileQualif();
 		semop(id_sem, &semPost, 1);
 		
-		//We're eliminating the cars that haven't been fast enough
+		//Nous éliminons les voitures n'ayant pas été assez rapides
 		id_sem = semop(id_sem, &semWait, 1);
 		id_sem = semop(id_sem, &semDo, 1);
 		setOut(2);
 		id_sem = semop(id_sem, &semPost, 1);
 		
 		//demander à l'utilisateur si il veut continuer : si oui smv[3]=0 sinon tuer tout les enfants
-		//and exit program
+		//et quiter le programme
 		interaction(3);
 		
 		//Debut des qualif 2
@@ -191,7 +191,7 @@ void worker(int nprocesses)
 			}
 			sleep(1);
 		}
-		//building starting list
+		//créer la list de départs 
 		sortCars(carsQualif2, 15);
 		buildStartPosition(carsQualif2, 2);
 		
@@ -201,7 +201,7 @@ void worker(int nprocesses)
 		generateRecapFileQualif();
 		semop(id_sem, &semPost, 1);
 		
-		//eliminating slowest cars
+		//élimination de la voiture la plus lente 
 		id_sem = semop(id_sem, &semWait, 1);
 		id_sem = semop(id_sem, &semDo, 1);
 		setOut(3);
@@ -230,7 +230,7 @@ void worker(int nprocesses)
 			}
 			sleep(1);
 		}
-		//building starting list
+		//Construction de la liste des départs ? (building) starting list
 		sortCars(carsQualif3, 10);
 		buildStartPosition(carsQualif3, 3);
 		
@@ -278,7 +278,7 @@ void worker(int nprocesses)
 	}
 	
 	
-	if(nprocesses > 0) //all the forks aren't done yet
+	if(nprocesses > 0) //toutes les forks ne sont pas encore finies
 	{
 		if ((pid = fork()) < 0)
 		{
@@ -312,7 +312,7 @@ void worker(int nprocesses)
 			}
 			practice(index-1, 1);
 			//waits for the others to finish and for the parent process to finish printing the
-			//recap file
+			//le fichier recap;
 			while(smv[0]!=0)
 			{
 				sleep(1);
@@ -321,7 +321,7 @@ void worker(int nprocesses)
 			//start of practice 2
 			practice(index-1, 2);
 			//waits for the others to finish and for the parent process to finish printing the
-			//recap file
+			//le fichier recap;
 			while(smv[1]!=0)
 			{
 				sleep(1);
@@ -330,7 +330,7 @@ void worker(int nprocesses)
 			//start of practice 3
 			practice(index-1, 3);
 			//waits for the others to finish and for the parent process to finish printing the
-			//recap file
+			//le fichier recap;
 			while(smv[2]!=0)
 			{
 				sleep(1);
@@ -338,8 +338,8 @@ void worker(int nprocesses)
 			
 			//Debut des qualif 1
 			qualif(index-1, 1);
-			//waits for the others to finish and for the parent process to finish printing the
-			//recap file
+			//attends que les autres ait fini et que les processus parents aient fini (d'imprimer 'd'ecrire) 
+			//le fichier recap;
 			while(smv[3]!=0)
 			{
 				sleep(1);
@@ -348,7 +348,7 @@ void worker(int nprocesses)
 			//Debut des qualif 2
 			qualif(index-1, 2);
 			//waits for the others to finish and for the parent process to finish printing the
-			//recap file
+			//le fichier recap;
 			while(smv[4]!=0)
 			{
 				sleep(1);
@@ -357,7 +357,7 @@ void worker(int nprocesses)
 			//Debut des qualif 3
 			qualif(index-1, 3);
 			//waits for the others to finish and for the parent process to finish printing the
-			//recap file
+			//le fichier recap;
 			while(smv[5]!=0)
 			{
 				sleep(1);
