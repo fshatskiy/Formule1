@@ -7,66 +7,66 @@
 #include <sys/ipc.h>
 #include <sys/sem.h>
 
-// Global variables that stay constant while the program runs
+// Variables globales qui restent constantes pendant l'exécution du programme
 
 /*
- * Number of laps during one race
+ * Nombre de tours pendant une course
  */
 int nbrLapMax;
 
 /*
- * Length of the circuit. This value is entered by the user.
+ * Longueur du circuit. Cette valeur est entrée par l'utilisateur.
  */
 int lengthCircuit;
 
 /*
- * This the pointer to the shared memory segment that holds the cars structures
+ * C'est le pointeur sur le segment de mémoire partagée qui contient les structures des voitures
  */
 structCar *cars;
 
 /*
- * This is the pointer to the shared memory segment that holds the global variables that needs to be shared by
- * all the process and changed throughout the running time of the program
+ * C'est le pointeur sur le segment de mémoire partagée qui contient les variables globales qui doivent être partagées par 
+ * tout le processus et modifiées au cours de la durée d'exécution du programme.
  */
 int *smv;
 
 /*
- * This is the pointer to the shared memory segment that holds the list of pids
+ * C'est le pointeur sur le segment de mémoire partagée qui contient la liste des pids.
  */
 int *pidList;
 
 
 /*
- * This is the pointer to the semaphores.
+ * C'est le pointeur sur les sémaphores.
  */
 int id_sem;
 
 /*
- * This the pointer to the shared memory segment that holds the cars structures for
- * the cars running in the second qualification
+ * C'est le pointeur sur le segment de mémoire partagée qui contient les structures des voitures pour 
+ * les voitures en seconde qualification
  */
 structCar *carsQualif2;
 
 /*
- * This the pointer to the shared memory segment that holds the cars structures for
- * the cars running in the third qualification
+ * C'est le pointeur sur le segment de mémoire partagée qui contient les structures 
+ * des voitures pour les voitures en cours de la troisième qualification.
  */
 structCar *carsQualif3;
 
 /*
- * Start position for the race (fill with the number of the car)
+ * Position de départ pour la course (indiquez le numéro de la voiture)
  */
 int startPosition[20];
 
 /*
- * This is a flag to know if it's the race or not 0 = not and 1 =race
+ * Ceci est un drapeau pour savoir si c'est la course ou pas 0 = pas et 1 = course
  */
 int isRace;
 
-//Structures for the semaphores
-//- first semaphore handles the shared memory segment for the cars (cras, carQualif 2 and 3)
-//- second semaphore handles the shared memory segment for different variables
-//- third semaphore handles the shared memory segment for the pid list
+//Structures pour les sémaphores
+//- le premier sémaphore gère le segment de mémoire partagée des voitures (cras, carQualif 2 et 3)
+//- le deuxième sémaphore gère le segment de mémoire partagée pour différentes variables
+//- le troisième sémaphore gère le segment de mémoire partagée pour la liste pid
 extern struct sembuf semWait;
 extern struct sembuf semDo;
 extern struct sembuf semPost;
@@ -80,124 +80,122 @@ extern struct sembuf semPost2;
 
 
 /*
- * This function generate a random number between min & max.
+ * Cette fonction génère un nombre aléatoire compris entre min et max.
  * @pre : min_number < max_number
  * @post : min_number < x < max_number & @returns x
  */
 int generateRandom(int min_number, int max_number);
 
 /*
- * This function generate a pit stop (based on a random function). i is the index of the car in the cars structure
+ * Cette fonction génère un arrêt au stand (basé sur une fonction aléatoire). i est l'indice de la voiture dans la structure des voitures
  * @pre : 0 <= i <= |cars|
- * @post : if pitStop, increments car[i].pitStop and returns time of that pitStop, otherwise returns 0.
+ * @post : si le pitStop incrémente car [i] .pitStop et renvoie l'heure de ce pitStop, sinon renvoie 0.
  */
 int pitStop(int i);
 
 /*
- * This function generate a random crash. index is the index of the car in cars.
+ * Cette fonction génère un crash aléatoire. index est l'indice de la voiture dans les voitures.
  * @pre : 0 <= index <= |cars|
- * @post : returns 1 if crash, 0 otherwise
+ * @post : returns 1 si crash, 0 otherwise
  */
 void crash(int index);
 
 /*
- * This function gets the maximum currentTime of the cars
+ * Cette fonction obtient le temps maximum actuel des voitures
  * @pre : structCar *cars exists
- * @post : returns the maximum currentTime of the cars
+ * @post : returns le max de temps actuelle des voitures
  */
 double getCurrTime();
 
 /*
- * This function computes the number of laps required for that track. This number is the smallest number
- * of laps so that the kilometers of the race >= 305 km.
+ * Cette fonction calcule le nombre de tours requis pour cette piste. Ce nombre est le plus petit nombre de tours de manière à ce que 
+ * les kilomètres parcourus soient> = 305 km.
  * @pre : km > 0
  * @post : returns x = 305/km if km%2==0|| x=1+305/km
  */
 int nbrLaps(int km);
 
 /*
- * This function matches the index of the process (in pidList) to an index in cars.
- * i is the pidList to match,
- * length is the length of the tab, t is the tab.
+ * Cette fonction fait correspondre l'index du processus (dans pidList) à un index dans les voitures. i est la pidList à comparer, 
+ * longueur est la longueur de la tabulation, t est la tabulation.
  * @pre : length>0
- * @post : returns the index if i is in the tab or length if it isn't
+ * @post : returns l'index si i est dans la table si ce n'est pas
  */
 int indexOf(int i, int length, int t[]);
 
 /*
- * This function checks whether or not the car is in the array. It returns 1 if it is and 0
- * if it isn't
+ * Cette fonction vérifie si la voiture est ou non dans le tableau. Il retourne 1 s'il est et 0 s'il ne l'est pas
  * @pre: length>0
- * @post: returns 1 if name is in t, 0 otherwise
+ * @post: returns 1 si le nom n'est pas dedans, 0 otherwise
  */
 int isIn(int name, int length, structCar t[]);
 
 /*
- * This function generates the time that a structCar car takes to do the first sector. i is the index of the car in cars.
+ * Cette fonction génère le temps nécessaire à une voiture structCar pour effectuer le premier secteur. i est l'indice de la voiture dans les voitures.
  * @pre : 0 <= i <= |cars|
  * @post : returns nothing and modify the following parameters from the car : currTime, currCircuit and if needed bestS1
  */
 void generateTimeS1(int i);
 
 /*
- * This function generates the time that a structCar car takes to do the first sector. i is the index of the car in cars.
+ * Cette fonction génère le temps nécessaire à une voiture structCar pour effectuer le premier secteur. i est l'indice de la voiture dans les voitures.
  * @pre : 0 <= i <= |cars|
  * @post : returns nothing and modify the following parameters from the car : currTime, currCircuit and if needed bestS2
  */
 void generateTimeS2(int i);
 
 /*
- * This function generates the time that a structCar car takes to do the first sector. i is the index of the car in cars.
+ * Cette fonction génère le temps nécessaire à une voiture structCar pour effectuer le premier secteur. i est l'indice de la voiture dans les voitures.
  * @pre : 0 <= i <= |cars|
  * @post : returns nothing and modify the following parameters from the car : currTime, currCircuit and if needed bestS3 and bestCircuit
  */
 void generateTimeS3(int i);
 
 /*
- * This function ask the user for an input and loops until the input is correct.
- * This input is a character.
+ * Cette fonction demande à l’utilisateur une entrée et effectue une boucle jusqu’à ce que l’entrée soit correcte. 
+ * Cette entrée est un caractère.
  * @pre :/
  * @post : return the character
  */
 char askAction();
 
 /*
- * This function handles the interaction with the user and the killing of the children
- * if needed. i is the index of the variable to reset.
+ * Cette fonction gère l'interaction avec l'utilisateur et le meurtre des enfants si nécessaire. 
+ * i est l'indice de la variable à réinitialiser.
  * @pre:/
  * @post : if the user wants to stop, calls killchildren
  */
 void interaction(int i);
 
 /*
- * This function allows the parent process to kill all its children.
+ * Cette fonction permet au processus parent de tuer tous ses enfants.
  * @pre:/
  * @post: returns nothing. All the children processes have been killed.
  */
 void killChildren();
 
 /*
- * This function allows the parent process to wake up all its children.
+ * Cette fonction permet au processus parent de réveiller tous ses enfants.
  * @pre:/
  * @post: returns nothing. All the children processes have been woken up.
  */
 void wakeChildren();
 
 /*
- * This function sorts an array of cars by their current global time.
+ * Cette fonction trie un tableau de voitures en fonction de leur heure globale actuelle.
  * @pre:/
  * @post: returns nothing, the array carsQualif has been sorted.
  */
 void sortRace(structCar carsQualif[], int sizeArrayCars);
 /*
- * This function add time by position of the car for the race.
+ * Cette fonction ajoute le temps par position de la voiture pour la course.
  * @pre:/
  * @post: returns nothing. Just add time to the cars.
  */
 void addTimeByPosition();
 
 /*
- * This functions sets the out variables of the cars that can"t compete in q
+ * Cette fonction définit les variables des voitures qui ne peuvent pas "concourir en q
  * to 1.
  * @pre: q==2||q==3
  * @post: returns nothing. out has been modified for the right cars
