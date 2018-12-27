@@ -12,7 +12,7 @@ void sortCarsByCurrTime(structCar carsRace[])
 	int j = 0;
 	
 	for(i=0; i < 20; i++)
-		//Fill the case i of the array
+		//Remplis les cases i du tableau
 	{
 		for(j = i+1; j < 20; j++)
 			//Check if there are not smaller number in the next cases
@@ -26,7 +26,7 @@ void sortCarsByCurrTime(structCar carsRace[])
 			}
 			else if(carsRace[j].numCircuit > carsRace[i].numCircuit)
 			{
-				//If it's true, swap number
+				//Si c'est vrai, echange le numero 
 				tmpCar = carsRace[i];
 				carsRace[i] = carsRace[j];
 				carsRace[j] = tmpCar;
@@ -81,7 +81,7 @@ void race(int index)
 		
 		if(cars[index].isOut == 0)
 		{
-			cars[index].numCircuit++; //Increment the number of completed circuit already performed 
+			cars[index].numCircuit++; //Incremente le nombre du circuit déjà terminé
 		}
 	}
 	
@@ -94,29 +94,30 @@ void race(int index)
 
 void generateRecapFileRace()
 {
-	//write file 
+	//ecrit le fichier 
 	FILE *file = NULL;
 	
-	file = fopen("RecapFileRace.txt", "a");
-	structCar temp = cars[0];
-	temp.currTime=10000;
-	if(file != NULL){
-		fprintf(file,"\n| N Voiture |     Best S1    |     Best S2    |     Best S3    |    Best Tour     |    Global time   |\n");
-		for(int i = 0; i < 20; i++){
+	file = fopen("RecapFileRace.txt", "a"); // ouvre le fichier RecapFileRace.txt et ecrit dedans ?
+	structCar temp = cars[0]; 
+	temp.currTime=10000; 
+	if(file != NULL){ // si le fichier n'est pas egal à null
+		fprintf(file,"\n| N Voiture |     Best S1    |     Best S2    |     Best S3    |    Best Tour     |    Global time   |\n"); //affiche ce qu'il y a après le \n 
+		for(int i = 0; i < 20; i++){ // boucle : int i est égal à 0 , tant que i est inferieur à 20 , i+1
 			if((temp.currTime>cars[i].currTime)&&(cars[i].currTime != 0)){temp=cars[i];}
 			fprintf(file,"|     %2d    |   %9f s  |   %9f s  |   %9f s  |    %9f s   |    %9f s   |\n", cars[i].name,cars[i].bestS1,cars[i].bestS2,cars[i].bestS3,cars[i].bestCircuit,cars[i].currTime);
 		}
 		fprintf(file,"\n The winner is the car number %2d with a time of %9f s\n",temp.name, temp.currTime);
-		fclose(file);
+		fclose(file); // fermeture de fichier 
 	}
-	else{
-		printf("Ouverture du fichier recap impossible");
+	else{ //Sinon
+		printf("Ouverture du fichier recap impossible"); //Affiche ce msg d'erreur
 	}
-	//after having saved the values in a file we reset them to zero, the cars will restart
-	//the next practice with a clean slate
+	//après avoir sauver les valeurs (résultats) dans un fichier on remet toutes les valeurs à zéro à l'aide du reset
+	// et les voiture vont repartir
+	//(l'entrainement suivant (le practice suivant) avec une ardouase propre
 	
 	for(int i=0; i<20; i++)
 	{
-		reset(i);
+		reset(i); //boucle : int i est égal à 0 , tant que i est inferieur à 20 , i+1
 	}
 }
