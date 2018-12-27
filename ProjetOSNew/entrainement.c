@@ -5,9 +5,9 @@
 #include <stdlib.h>
 
 //Valeurs de temps représentant la longueur des essais
-double time1 = 5400;//90 min
-double time2 = 5400;
-double time3 = 3600;//60 min
+double temps1 = 5400;//90 min
+double temps2 = 5400;
+double temps3 = 3600;//60 min
 
 void practice(int index, int p)
 {
@@ -120,7 +120,7 @@ void generateRecapFilePractice()//generateEssaiLibreFile()
 	FILE *fichier = NULL;
 	
 	//ouverture du fichier avec l'argument "a" pour annexer chaque essai
-	fichier = fopen("RecapFilePractice.txt", "a");//cree et l'ouvre -- "essaiLibre.txt", "a"
+	fichier = fopen("RecapEntrainement.txt", "a");//cree et ouvre le fichier
 	structCar temp = cars[0];
 	temp.bestCircuit=10000;//Gros nombre pour le bon fonctionnement de la fct
 	if(fichier != NULL){
