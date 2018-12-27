@@ -1,20 +1,20 @@
 #include "voiture.h"
 #include "utilitaire.h"
 
-//Initialization of the car
+//Initialisation des voitures
 void init(int i, int name)
 {
-	cars[i].name = name;    //Name of the car
-	cars[i].bestCircuit=0;  //Best time on a circuit lap
-	cars[i].bestS1=0;       //Best time on the first sector
-	cars[i].bestS2=0;       //Best time on the second sector
-	cars[i].bestS3=0;       //Best time on the third sector
-	cars[i].numCircuit=0;   //Number of laps already done
-	cars[i].currTime=0;     //Time elapsed since the start of the race
-	cars[i].currCircuit=0;  //Current time of the race
-	cars[i].inStand=0;      /*number of times it has passed the stand (between 1 and 3) */
-	/*takes between 22 and 27 seconds */
-	cars[i].isOut=0;        //0 if the car still run, 1 if it's crash
+	cars[i].name = name;    //Nom de la voiture
+	cars[i].bestCircuit=0;  //Meilleur temps sur un tour de circuit
+	cars[i].bestS1=0;       //Meilleur temps sur le premier secteur
+	cars[i].bestS2=0;       //Meilleur temps sur le deuxieme secteur
+	cars[i].bestS3=0;       //Meilleur temps sur le troisieme secteur
+	cars[i].numCircuit=0;   //Nombre de tours déjà effectués
+	cars[i].currTime=0;     //Temps écoulé depuis le début de la course
+	cars[i].currCircuit=0;  //Heure actuelle de la course
+	cars[i].inStand=0;      /*nombre de fois qu'il a passé le stand (entre 1 et 3) */
+	/*prend entre 22 et 27 secondes */
+	cars[i].isOut=0;        //0 si la voiture continue de rouler, 1 si elle s'écrase
 	
 	if(i<10)
 	{
@@ -54,7 +54,7 @@ void init(int i, int name)
 	}
 }
 
-//reset car's scores indexed by i
+//réinitialiser les scores de la voiture indexés par i
 void reset(int i)
 {
 	cars[i].bestCircuit=0;
