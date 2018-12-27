@@ -2,33 +2,33 @@
 #define _VOITURE_H
 
 /*
- * Definition of the structure representing a car
+ * Définition de la structure représentant une voiture
  */
 typedef struct structCar {
-	int name;           //Name of the car
-	double bestCircuit; //Best time on a circuit lap
-	double bestS1;      //Best time on the first sector
-	double bestS2;      //Best time on the second sector
-	double bestS3;      //Best time on the third sector
-	int numCircuit;     //Number of laps already done
-	double currTime;    //Time elapsed since the start of the race
-	double currCircuit; //Current time of the race
-	int inStand;        /*number of times it has passed the stand (between 1 and 3) */
-	/*takes between 22 and 27 seconds */
-	int isOut;          //0 if the car still run, 1 if it's crash
+	int name;           //nom de la voiture
+	double bestCircuit; //Meilleur temps sur un tour de circuit
+	double bestS1;      //Meilleur temps sur le premier secteur
+	double bestS2;      //Meilleur temps sur le deuxieme secteur
+	double bestS3;      //Meilleur temps sur le troisieme secteur
+	int numCircuit;     //Nombre de tours déjà effectués
+	double currTime;    //Temps écoulé depuis le début de la course
+	double currCircuit; //Heure actuelle de la course
+	int inStand;        /*nombre de fois qu'il a passé le stand (entre 1 et 3) */
+	/*prend entre 22 et 27 secondes */
+	int isOut;          //0 si la voiture est toujours en marche, 1 si c'est le crash
 }structCar;
 
 /*
- * Initialize a car
- * @pre : i the index of the tab containing all the cars and name the name of the car
- * @post : initialize car->name of the car indexed by i, the others are initialized at 0.
+ * initialisation des voitutres
+ * @pre : i est l'index de l'onglet contenant toutes les voitures et nommez le nom de la voiture
+ * @post : initialize car-> name de la voiture indexée par i, les autres sont initialisées à 0.
  */
 void init(int i, int name);
 
 /*
- * Reset car's scores indexed by i
- * @pre : i the index of the tab containing all the cars
- * @post : all variable are reset except the car's name.
+ * Réinitialiser les scores de la voiture indexés par i
+ * @pre : i l'index de l'onglet contenant toutes les voitures
+ * @post : toutes les variables sont réinitialisées sauf le nom de la voiture.
  */
 void reset(int i);
 
