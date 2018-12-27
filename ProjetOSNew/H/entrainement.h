@@ -4,15 +4,8 @@
 #include "voiture.h"
 
 /*
- * Runs the practice on a car situated at cars[index]
- * @pre : index of a car, p==1 || p==2 || p==3
- * @post : modify the values in the car structure
- */
-//A Remplacer le commentaire par
-
-/*
- * Lance l'essai sur la voiture située dans cars[index]
- * @pre : index de la car, essai==1 || essai==2 || essai==3 ---> essais
+ * Lance l'entrainement sur la voiture située dans cars[index]
+ * @pre : index de la car, p==1 || p==2 || p==3 ---> essais
  * @post : modifie les valeurs de la strucutre car
  */
 void entrainement(int index, int p);
@@ -25,4 +18,4 @@ void entrainement(int index, int p);
 void generateRecapFilePractice();
 
 
-#endif /* practice_h */
+#endif /* entrainement_h */
