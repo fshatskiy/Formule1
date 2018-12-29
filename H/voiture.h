@@ -6,12 +6,12 @@
  */
 typedef struct structTuture {
 	int nom;           //nom de la voiture
-	double bestCircuit; //Meilleur temps sur un tour de circuit
-	double bestS1;      //Meilleur temps sur le premier secteur
-	double bestS2;      //Meilleur temps sur le deuxieme secteur
-	double bestS3;      //Meilleur temps sur le troisieme secteur
+	double topCircuit; //Meilleur temps sur un tour de circuit
+	double topS1;      //Meilleur temps sur le premier secteur
+	double topS2;      //Meilleur temps sur le deuxieme secteur
+	double topS3;      //Meilleur temps sur le troisieme secteur
 	int numCircuit;     //Nombre de tours déjà effectués
-	double currTime;    //Temps écoulé depuis le début de la course
+	double currTemps;    //Temps écoulé depuis le début de la course
 	double currCircuit; //Heure actuelle de la course
 	int inStand;        /*nombre de fois qu'il a passé le stand (entre 1 et 3) */
 	/*prend entre 22 et 27 secondes */
