@@ -133,29 +133,29 @@ int isIn(int nom, int longueur, structTuture t[]);
 /*
  * Cette fonction génère le temps nécessaire à une voiture structTuture pour effectuer le premier secteur. i est l'indice de la voiture dans les voitures.
  * @pre : 0 <= i <= |voitures|
- * @post : returns nothing and modify the following parameters from the tuture : currTemps, currCircuit and if needed bestS1
+ * @post : returns rien et modifie les param suivants de tuture : currTemps, currCircuit and if needed bestS1
  */
 void genereTempsS1(int i);
 
 /*
  * Cette fonction génère le temps nécessaire à une voiture structTuture pour effectuer le premier secteur. i est l'indice de la voiture dans les voitures.
  * @pre : 0 <= i <= |voitures|
- * @post : returns nothing and modify the following parameters from the tuture : currTemps, currCircuit and if needed bestS2
+ * @post : returns rien et modifie les param suivants de tuture : currTemps, currCircuit and if needed bestS2
  */
 void genereTempsS2(int i);
 
 /*
  * Cette fonction génère le temps nécessaire à une voiture structTuture pour effectuer le premier secteur. i est l'indice de la voiture dans les voitures.
  * @pre : 0 <= i <= |voitures|
- * @post : returns nothing and modify the following parameters from the tuture : currTemps, currCircuit and if needed bestS3 and bestCircuit
+ * @post : returns rien et modifie les param suivants de tuture : currTemps, currCircuit and if needed bestS3 and bestCircuit
  */
 void genereTempsS3(int i);
 
 /*
  * Cette fonction demande à l’utilisateur une entrée et effectue une boucle jusqu’à ce que l’entrée soit correcte. 
- * Cette entrée est un tutureactère.
+ * Cette entrée est un caractère.
  * @pre :/
- * @post : return the character
+ * @post : return le caractère
  */
 char demandeAction();
 
@@ -163,34 +163,34 @@ char demandeAction();
  * Cette fonction gère l'interaction avec l'utilisateur et le meurtre des enfants si nécessaire. 
  * i est l'indice de la variable à réinitialiser.
  * @pre:/
- * @post : if the user wants to stop, calls killchildren
+ * @post : si l'utilisateur veut arrêter, il appelle alors le killchildren
  */
 void interaction(int i);
 
 /*
  * Cette fonction permet au processus parent de tuer tous ses enfants.
  * @pre:/
- * @post: returns nothing. All the children processes have been killed.
+ * @post: returns rien. Tous les process enfant on été kill.
  */
 void killChildren();
 
 /*
  * Cette fonction permet au processus parent de réveiller tous ses enfants.
  * @pre:/
- * @post: returns nothing. All the children processes have been woken up.
+ * @post: returns rien. Tous les process enfant on été réveillés.
  */
 void wakeChildren();
 
 /*
  * Cette fonction trie un tableau de voitures en fonction de leur heure globale actuelle.
  * @pre:/
- * @post: returns nothing, the array voituresQualif has been sorteded.
+ * @post: returns rien, le tableau voituresQualif a été trié.
  */
 void triCourse(structTuture voituresQualif[], int sizeArrayVoitures);
 /*
  * Cette fonction ajoute le temps par position de la voiture pour la course.
  * @pre:/
- * @post: returns nothing. Ajout du temps aux voitures.
+ * @post: returns rien. Ajout du temps aux voitures.
  */
 void ajouteTempsEnFctPosition();
 
@@ -198,7 +198,7 @@ void ajouteTempsEnFctPosition();
  * Cette fonction définit les variables des voitures qui ne peuvent pas "concourir en q
  * to 1.
  * @pre: q==2||q==3
- * @post: Ne retourne rien. Out a été modifié pour les bonnes voitures
+ * @post: returns rien. Out a été modifié pour les bonnes voitures
  */
 void setOut(int q);
 
