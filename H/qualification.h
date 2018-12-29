@@ -8,7 +8,7 @@
  * @pre : voituresQualif not null, sizeArrayCars==20 || sizeArrayCars==15 || sizeArrayCars==10
  * @post : modification de voituresQualif
  */
-void triVoitures(structTuture voituresQualif[], int sizeArrayCars);
+void triVoitures(structTuture voituresQualif[], int sizeArrayVoitures);
 
 /*
  * Construction de la grille de départ

@@ -17,7 +17,7 @@ int nbrLapMax;
 /*
  * Longueur du circuit. Cette valeur est entrée par l'utilisateur.
  */
-int lengthCircuit;
+int longueurCircuit;
 
 /*
  * C'est le pointeur sur le segment de mémoire partagée qui contient les structures des voitures
@@ -105,7 +105,7 @@ void crash(int index);
  * @pre : structTuture *voitures exists
  * @post : returns le max de temps actuelle des voitures
  */
-double getCurrTime();
+double getCurrTemps();
 
 /*
  * Cette fonction calcule le nombre de tours requis pour cette piste. Ce nombre est le plus petit nombre de tours de manière à ce que 
@@ -121,33 +121,33 @@ int nbrLaps(int km);
  * @pre : length>0
  * @post : returns l'index si i est dans la table si ce n'est pas
  */
-int indexOf(int i, int length, int t[]);
+int indexOf(int i, int longueur, int t[]);
 
 /*
  * Cette fonction vérifie si la voiture est ou non dans le tableau. Il retourne 1 s'il est et 0 s'il ne l'est pas
  * @pre: length>0
  * @post: returns 1 si le nom n'est pas dedans, 0 otherwise
  */
-int isIn(int nom, int length, structTuture t[]);
+int isIn(int nom, int longueur, structTuture t[]);
 
 /*
  * Cette fonction génère le temps nécessaire à une voiture structTuture pour effectuer le premier secteur. i est l'indice de la voiture dans les voitures.
  * @pre : 0 <= i <= |voitures|
- * @post : returns nothing and modify the following parameters from the tuture : currTime, currCircuit and if needed bestS1
+ * @post : returns nothing and modify the following parameters from the tuture : currTemps, currCircuit and if needed bestS1
  */
 void genereTempsS1(int i);
 
 /*
  * Cette fonction génère le temps nécessaire à une voiture structTuture pour effectuer le premier secteur. i est l'indice de la voiture dans les voitures.
  * @pre : 0 <= i <= |voitures|
- * @post : returns nothing and modify the following parameters from the tuture : currTime, currCircuit and if needed bestS2
+ * @post : returns nothing and modify the following parameters from the tuture : currTemps, currCircuit and if needed bestS2
  */
 void genereTempsS2(int i);
 
 /*
  * Cette fonction génère le temps nécessaire à une voiture structTuture pour effectuer le premier secteur. i est l'indice de la voiture dans les voitures.
  * @pre : 0 <= i <= |voitures|
- * @post : returns nothing and modify the following parameters from the tuture : currTime, currCircuit and if needed bestS3 and bestCircuit
+ * @post : returns nothing and modify the following parameters from the tuture : currTemps, currCircuit and if needed bestS3 and bestCircuit
  */
 void genereTempsS3(int i);
 
@@ -186,7 +186,7 @@ void wakeChildren();
  * @pre:/
  * @post: returns nothing, the array voituresQualif has been sorteded.
  */
-void triCourse(structTuture voituresQualif[], int sizeArrayCars);
+void triCourse(structTuture voituresQualif[], int sizeArrayVoitures);
 /*
  * Cette fonction ajoute le temps par position de la voiture pour la course.
  * @pre:/

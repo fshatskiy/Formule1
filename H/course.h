@@ -18,9 +18,9 @@ void triVoituresEnFctTemps(structTuture voituresCourse[]);
 void course(int index);
 
 /*
- * Creates the file with the recap of the course
+ * Crée le fichier avec le récap de la course
  * @pre : voitures not null
- * @post : creates a file with all the infos needed
+ * @post : Crée le fichier avec toutes les infos dont on a besoin
  */
 void genereRecapCourseFile();
 
