@@ -87,25 +87,25 @@ double getCurrTemps()
 int nbrLaps(int km)
 {
 	int nbr = 70;			// Le nombre de tours par défaut
-	int longMinCourse = 305;	// Longueur minimale pour une course
+	int longueurMinCourse = 305;	// longueur minimale pour une course
 	if(km == 0)  //si l'utilisateur n'entre pas de paramètre pour les kilomètres
 	{
 		return nbr;
 	}
-	if(longMinCourse % km == 0)
+	if(longueurMinCourse % km == 0)
 	{
-		nbr = longMinCourse/km;
+		nbr = longueurMinCourse/km;
 	}
 	else
 	{
-		nbr = 1 + (longMinCourse/km);
+		nbr = 1 + (longueurMinCourse/km);
 	}
 	return nbr;
 }
 
-int indexOf(int i, int long, int t[])
+int indexOf(int i, int longueur, int t[])
 {
-	for(int j=0; j<long; j++)
+	for(int j=0; j<longueur; j++)
 	{
 		if(i==t[j])
 		{
@@ -113,13 +113,13 @@ int indexOf(int i, int long, int t[])
 		}
 	}
 	//si le pid n'est pas dans l'onglet, nous renvoyons la longueur de l'onglet pour permettre la détection d'erreur
-	return long;
+	return longueur;
 }
 
-int isIn(int nom, int long, structTuture t[])
+int isIn(int nom, int longueur, structTuture t[])
 {
 	int k=0;
-	for(int j=0; j<long; j++)
+	for(int j=0; j<longueur; j++)
 	{
 		if(nom==t[j].nom)
 		{
@@ -134,7 +134,7 @@ void genereTempsS1(int i)
 {
 	semaph(id_sem, &semWait, 1);
 	semaph(id_sem, &semDo, 1);
-	double longPercent = 0.28; // Longueur du secteur en pourcentage de la longueur totale du circuit
+	double longueurPercent = 0.28; // longueur du secteur en pourcentage de la longueur totale du circuit
 	double temps;
 	
 	if(!(isCourse == 1 && voitures[i].numCircuit == 0)){
@@ -146,7 +146,7 @@ void genereTempsS1(int i)
 	crash(i); //appelle la fonction pour voir si la voiture tombe en panne
 	
 	if(voitures[i].isOut == 0){
-		temps = longPercent*longCircuit /(vitesseMoy/transfHourInSec); //calcul de la performance temporelle de la voiture en secondes pour ce secteur
+		temps = longueurPercent*longueurCircuit /(vitesseMoy/transfHourInSec); //calcul de la performance temporelle de la voiture en secondes pour ce secteur
 		
 		//Ajout du temps au temps actuel du circuit et au temps total depuis le début de la partie de la course
 		voitures[i].currCircuit += temps;
@@ -164,7 +164,7 @@ void genereTempsS2(int i)
 {
 	semaph(id_sem, &semWait, 1);
 	semaph(id_sem, &semDo, 1);
-	double longPercent = 0.33; //Longueur du secteur en pourcentage de la longueur totale du circuit
+	double longueurPercent = 0.33; //longueur du secteur en pourcentage de la longueur totale du circuit
 	double temps;
 	
 	double vitesseMoy = (double)(genereRandom(3000, 3640)/10); //génération de la vitesse moyenne de la voiture
@@ -172,7 +172,7 @@ void genereTempsS2(int i)
 	crash(i); //appelez la fonction pour voir si l'accident de voiture
 	
 	if(voitures[i].isOut == 0){
-		temps = longPercent * longCircuit / ( vitesseMoy / transfHourInSec ); // calcul de la performance temporelle de la voiture en secondes pour ce secteur
+		temps = longueurPercent * longueurCircuit / ( vitesseMoy / transfHourInSec ); // calcul de la performance temporelle de la voiture en secondes pour ce secteur
 		
 		// Ajout du temps au temps actuel du circuit et au temps total depuis le début de la partie de la course
 		voitures[i].currCircuit += temps;
@@ -192,7 +192,7 @@ void genereTempsS3(int i)
 {
 	semaph(id_sem, &semWait, 1);
 	semaph(id_sem, &semDo, 1);
-	double longPercent = 0.39; //Longueur du secteur en pourcentage de la longueur totale du circuit
+	double longueurPercent = 0.39; //longueur du secteur en pourcentage de la longueur totale du circuit
 	double temps;
 	
 	double vitesseMoy = (double)(genereRandom(3200, 3550)/10); //génération de la vitesse moyenne de la voiture
@@ -200,7 +200,7 @@ void genereTempsS3(int i)
 	crash(i); //appelez la fonction pour voir si l'accident de voiture
 	
 	if(voitures[i].isOut == 0){
-		temps = longPercent * longCircuit / ( vitesseMoy / transfHourInSec ); //calcul de la performance temporelle de la voiture en secondes pour ce secteur
+		temps = longueurPercent * longueurCircuit / ( vitesseMoy / transfHourInSec ); //calcul de la performance temporelle de la voiture en secondes pour ce secteur
 		temps += (double)pitStop(i); // ajout du pit stop
 		
 		// Ajout du temps au temps actuel du circuit et au temps total depuis le début de la partie de la course

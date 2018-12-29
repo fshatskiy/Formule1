@@ -1,4 +1,4 @@
-neemn#include "voiture.h"
+#include "voiture.h"
 #include "utilitaire.h"
 #include "entrainement.h"
 #include "qualification.h"
@@ -7,8 +7,8 @@ neemn#include "voiture.h"
 #include <stdlib.h>
 #include <unistd.h>
 
-#include <temps.h>
-#include <sys/temps.h>
+#include <time.h>
+#include <sys/time.h>
 #include <sys/shm.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
@@ -41,7 +41,7 @@ void worker(int nprocesses)
 				tempo[i]=voitures[i];
 			}
 			id_sem = semaph(id_sem, &semPost, 1);
-			sortVoitures(tempo, 20);
+			triVoitures(tempo, 20);
 			printf("\n\n\n\n\nEntrainement 1 :\n\n");
 			printf("\n| N Voiture |     top S1    |     top S2    |     top S3    |    top Tour     |    Temps Total   |\n");
 			for(int i = 0; i < 20; i++){
@@ -72,7 +72,7 @@ void worker(int nprocesses)
 				tempo[i]=voitures[i];
 			}
 			id_sem = semaph(id_sem, &semPost, 1);
-			sortVoitures(tempo, 20);
+			triVoitures(tempo, 20);
 			printf("\n\n\n\n\nEntrainement 2 :\n\n");
 			printf("\n| N Voiture |     top S1    |     top S2    |     top S3    |    top Tour     |    Temps Total   |\n");
 			for(int i = 0; i < 20; i++){
@@ -104,7 +104,7 @@ void worker(int nprocesses)
 				tempo[i]=voitures[i];
 			}
 			id_sem = semaph(id_sem, &semPost, 1);
-			sortVoitures(tempo, 20);
+			triVoitures(tempo, 20);
 			printf("\n\n\n\n\nEntrainement 3 :\n\n");
 			printf("\n| N Voiture |     top S1    |     top S2    |     top S3    |    top Tour     |    Temps Total   |\n");
 			for(int i = 0; i < 20; i++){
@@ -135,7 +135,7 @@ void worker(int nprocesses)
 				tempo[i]=voitures[i];
 			}
 			id_sem = semaph(id_sem, &semPost, 1);
-			sortVoitures(tempo, 20);
+			triVoitures(tempo, 20);
 			printf("\n\n\n\n\nQualification 1 :\n\n");
 			printf("\n| N Voiture |     top S1    |     top S2    |     top S3    |    top Tour     |    Temps Total   |\n");
 			for(int i = 0; i < 20; i++){
@@ -152,7 +152,7 @@ void worker(int nprocesses)
 		}
 		id_sem = semaph(id_sem, &semPost, 1);
 		
-		sortVoitures(tempo, 20);
+		triVoitures(tempo, 20);
 		buildStartPosition(tempo, 1);
 		
 		//ici, toutes les voitures on fini le entrainement donc on génère le fichier recap.
@@ -183,7 +183,7 @@ void worker(int nprocesses)
 				tempo[i]=voitures[i];
 			}
 			id_sem = semaph(id_sem, &semPost, 1);
-			sortVoitures(tempo, 20);
+			triVoitures(tempo, 20);
 			printf("\n\n\n\n\nQualification 2 :\n\n");
 			printf("\n| N Voiture |     top S1    |     top S2    |     top S3    |    top Tour     |    Temps Total   |\n");
 			for(int i = 0; i < 20; i++){
@@ -192,7 +192,7 @@ void worker(int nprocesses)
 			sleep(1);
 		}
 		//créer la list de départs 
-		sortVoitures(voituresQualif2, 15);
+		triVoitures(voituresQualif2, 15);
 		buildStartPosition(voituresQualif2, 2);
 		
 		//ici, toutes les voitures on fini le entrainement donc on génère le fichier recap.
@@ -222,16 +222,16 @@ void worker(int nprocesses)
 				tempo[i]=voitures[i];
 			}
 			id_sem = semaph(id_sem, &semPost, 1);
-			sortVoitures(tempo, 20);
+			triVoitures(tempo, 20);
 			printf("\n\n\n\n\nQualification 3 :\n\n");
 			printf("\n| N Voiture |     top S1    |     top S2    |     top S3    |    top Tour     |    Temps Total   |\n");
 			for(int i = 0; i < 20; i++){
-				printf("|     %2d    |   %9f s  |   %9f s  |   %9f s  |    %9f s   |    %9f s   |\n", voitures[i].nom,voitures[i].topS1,voitures[i].topS2,voitures[i].topS3,voitures[i].topCircuit,voitures[i].currTemps);
+				printf("|     %2d    |   %9f s  |   %9f s  |   %9f s  |    %9f s   |    %9f s   |\n", 				voitures[i].nom,voitures[i].topS1,voitures[i].topS2,voitures[i].topS3,voitures[i].topCircuit,voitures[i].currTemps);
 			}
 			sleep(1);
 		}
 		//Construction de la liste des départs ? (building) starting list
-		sortVoitures(voituresQualif3, 10);
+		triVoitures(voituresQualif3, 10);
 		buildStartPosition(voituresQualif3, 3);
 		
 		//ici, toutes les voitures on fini le entrainement donc on génère le fichier recap.
@@ -258,7 +258,7 @@ void worker(int nprocesses)
 				tempo[i]=voitures[i];
 			}
 			id_sem = semaph(id_sem, &semPost, 1);
-			sortVoituresByCurrTemps(tempo);
+			triVoituresByCurrTemps(tempo);
 			printf("\n\n\n\n\nCourse\n\n");
 			printf("\n| N° Voiture |     top S1    |     top S2    |     top S3    |    top Tour     |    Temps Total   |\n");
 			for(int i = 0; i < 20; i++){
@@ -421,13 +421,13 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	
-	//Ici on débute l'interaction avec l'utilisateur en lui demandant de choisir la longueur du tour. 
+	//Ici on débute l'interaction avec l'utilisateur en lui demandant de choisir la longueurueur du tour. 
 	int km; // en kilomètres
 	char s[100];
 	puts("Welcome to this weekend Formula One GP!");
 	do
 	{
-		puts("Entrez la longueur du tour en km");
+		puts("Entrez la longueurueur du tour en km");
 		puts("Ce nombre doit être entre 1 et 7");
 		
 		if (fgets(s, 100, stdin) == NULL)
@@ -438,8 +438,8 @@ int main(int argc, char *argv[])
 		
 		sscanf(s, "%d", &km);
 	} while (km<1||km>7);
-	longCircuit = km;
-	nbrLapMax = nbrLaps(longCircuit);
+	longueurCircuit = km;
+	nbrLapMax = nbrLaps(longueurCircuit);
 	
 	//on attache la memoire partagée
 	voitures = shmat(id_shm, NULL, SHM_W);
