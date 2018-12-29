@@ -9,7 +9,7 @@ double tempsQualif2 = 900;//15 min
 double tempsQualif3 = 720;//12 min
 
 //Tri de voitures
-void sortVoitures(structTuture voituresQualif[], int sizeArrayVoitures)
+void triVoitures(structTuture voituresQualif[], int sizeArrayVoitures)
 {
 	int i=0;
 	structTuture tmpTuture;
@@ -80,10 +80,10 @@ void buildStartPosition(structTuture voituresQualif[], int q)
 
 void qualif(int index, int q)
 {
-	id_sem = semaph(id_sem, &semWait, 1);
-	id_sem = semaph(id_sem, &semDo, 1);
+	id_sem = semop(id_sem, &semWait, 1);
+	id_sem = semop(id_sem, &semDo, 1);
 	double temps = getCurrTemps();
-	id_sem = semaph(id_sem, &semPost, 1);
+	id_sem = semop(id_sem, &semPost, 1);
 	double tempsQualif = 0.0;
 	
 	//determine la durée de l'essai
@@ -108,67 +108,67 @@ void qualif(int index, int q)
 		//si la voiture a un meilleur temps pour S1 que toutes les autres, mise à jour de la variable globale
 		if(voitures[index].topS1<smv[7])
 		{
-			id_sem = semaph(id_sem, &semWait1, 1);
-			id_sem = semaph(id_sem, &semDo1, 1);
+			id_sem = semop(id_sem, &semWait1, 1);
+			id_sem = semop(id_sem, &semDo1, 1);
 			smv[7] = voitures[index].topS1;
-			id_sem = semaph(id_sem, &semPost1, 1);
+			id_sem = semop(id_sem, &semPost1, 1);
 		}
 		genereTempsS2(index);
 		
 		//si la voiture a un meilleur temps pour S2 que toutes les autres, mise à jour de la variable globale
 		if(voitures[index].topS2<smv[8])
 		{
-			id_sem = semaph(id_sem, &semWait1, 1);
-			id_sem = semaph(id_sem, &semDo1, 1);
+			id_sem = semop(id_sem, &semWait1, 1);
+			id_sem = semop(id_sem, &semDo1, 1);
 			smv[8] = voitures[index].topS2;
-			id_sem = semaph(id_sem, &semPost1, 1);
+			id_sem = semop(id_sem, &semPost1, 1);
 		}
 		genereTempsS3(index);
 		
 		//si la voiture a un meilleur temps pour S3 que toutes les autres, mise à jour de la variable globale
 		if(voitures[index].topS3<smv[9])
 		{
-			id_sem = semaph(id_sem, &semWait1, 1);
-			id_sem = semaph(id_sem, &semDo1, 1);
+			id_sem = semop(id_sem, &semWait1, 1);
+			id_sem = semop(id_sem, &semDo1, 1);
 			smv[9] = voitures[index].topS3;
-			id_sem = semaph(id_sem, &semPost1, 1);
+			id_sem = semop(id_sem, &semPost1, 1);
 		}
 		//si la voiture a un meilleur temps du circuit que toutes les autres, mise à jour de la variable globale
 		if(voitures[index].topCircuit<smv[10])
 		{
-			id_sem = semaph(id_sem, &semWait1, 1);
-			id_sem = semaph(id_sem, &semDo1, 1);
+			id_sem = semop(id_sem, &semWait1, 1);
+			id_sem = semop(id_sem, &semDo1, 1);
 			smv[10] = voitures[index].topCircuit;
-			id_sem = semaph(id_sem, &semPost1, 1);
+			id_sem = semop(id_sem, &semPost1, 1);
 		}
 		// mise à jour de l'heure actuelle de la course
-		id_sem = semaph(id_sem, &semWait, 1);
-		id_sem = semaph(id_sem, &semDo, 1);
+		id_sem = semop(id_sem, &semWait, 1);
+		id_sem = semop(id_sem, &semDo, 1);
 		temps = getCurrTemps();
-		id_sem = semaph(id_sem, &semPost, 1);
+		id_sem = semop(id_sem, &semPost, 1);
 	}
 	//Ici, mise à jour de la valeur de smv [3], [4] ou [5], 
 	//indique au processus parent que la voiture a terminé son cycle de qualification.
 	if(q==1)
 	{
-		id_sem = semaph(id_sem, &semWait1, 1);
-		id_sem = semaph(id_sem, &semDo1, 1);
+		id_sem = semop(id_sem, &semWait1, 1);
+		id_sem = semop(id_sem, &semDo1, 1);
 		smv[3]++;
-		id_sem = semaph(id_sem, &semPost1, 1);
+		id_sem = semop(id_sem, &semPost1, 1);
 	}
 	if(q==2)
 	{
-		id_sem = semaph(id_sem, &semWait1, 1);
-		id_sem = semaph(id_sem, &semDo1, 1);
+		id_sem = semop(id_sem, &semWait1, 1);
+		id_sem = semop(id_sem, &semDo1, 1);
 		smv[4]++;
-		id_sem = semaph(id_sem, &semPost1, 1);
+		id_sem = semop(id_sem, &semPost1, 1);
 	}
 	if(q==3)
 	{
-		id_sem = semaph(id_sem, &semWait1, 1);
-		id_sem = semaph(id_sem, &semDo1, 1);
+		id_sem = semop(id_sem, &semWait1, 1);
+		id_sem = semop(id_sem, &semDo1, 1);
 		smv[5]++;
-		id_sem = semaph(id_sem, &semPost1, 1);
+		id_sem = semop(id_sem, &semPost1, 1);
 	}
 	
 }

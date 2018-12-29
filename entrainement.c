@@ -5,16 +5,16 @@
 #include <stdlib.h>
 
 //Valeurs de temps représentant la longueur des entrainements
-double temps1 = 5400;//90 min
-double temps2 = 5400;
-double temps3 = 3600;//60 min
+double temps1 = 100;//90 min
+double temps2 = 100;
+double temps3 = 100;//60 min
 
 void entrainement(int index, int p)
 {
-	semaph(id_sem, &semWait, 1);//verouille
-	semaph(id_sem, &semDo, 1);//prend le controle du sémaph
+	semop(id_sem, &semWait, 1);//verouille
+	semop(id_sem, &semDo, 1);//prend le controle du sémaph
 	double temps = getCurrTemps();
-	semaph(id_sem, &semPost, 1);//deverouille
+	semop(id_sem, &semPost, 1);//deverouille
 	
 	double tempsEntrainement;
 	//détermine durée de l'entrainement
@@ -40,10 +40,10 @@ void entrainement(int index, int p)
 		//si la voiture a un meilleur temps pour S1, màj de la variable globale
 		if(voitures[index].topS1 < smv[7])
 		{
-			semaph(id_sem, &semWait1, 1);
-			semaph(id_sem, &semDo1, 1);
+			semop(id_sem, &semWait1, 1);
+			semop(id_sem, &semDo1, 1);
 			smv[7] = voitures[index].topS1;
-			semaph(id_sem, &semPost1, 1);
+			semop(id_sem, &semPost1, 1);
 		}
 		
 		//lancement du secteur 2
@@ -52,10 +52,10 @@ void entrainement(int index, int p)
 		//si la voiture a un meilleur temps pour S2, màj de la variable globale
 		if(voitures[index].topS2 < smv[8])
 		{
-			semaph(id_sem, &semWait1, 1);
-			semaph(id_sem, &semDo1, 1);
+			semop(id_sem, &semWait1, 1);
+			semop(id_sem, &semDo1, 1);
 			smv[8] = voitures[index].topS2;
-			semaph(id_sem, &semPost1, 1);
+			semop(id_sem, &semPost1, 1);
 		}
 		
 		//lancement du secteur 3
@@ -64,48 +64,48 @@ void entrainement(int index, int p)
 		//si la voiture a un meilleur temps pour S3, màj de la variable globale
 		if(voitures[index].topS3 < smv[9])
 		{
-			semaph(id_sem, &semWait1, 1);
-			semaph(id_sem, &semDo1, 1);
+			semop(id_sem, &semWait1, 1);
+			semop(id_sem, &semDo1, 1);
 			smv[9] = voitures[index].topS3;
-			semaph(id_sem, &semPost1, 1);
+			semop(id_sem, &semPost1, 1);
 		}
 		//si la voiture a un meilleur temps que tous les autres, màj de la variable globale
 		if(voitures[index].topCircuit>smv[10])
 		{
-			semaph(id_sem, &semWait1, 1);
-			semaph(id_sem, &semDo1, 1);
+			semop(id_sem, &semWait1, 1);
+			semop(id_sem, &semDo1, 1);
 			smv[10] = voitures[index].topCircuit;
-			semaph(id_sem, &semPost1, 1);
+			semop(id_sem, &semPost1, 1);
 		}
 		
 		//màj du temps global de la course
-		semaph(id_sem, &semWait, 1);
-		semaph(id_sem, &semDo, 1);
+		semop(id_sem, &semWait, 1);
+		semop(id_sem, &semDo, 1);
 		temps = getCurrTemps();
-		semaph(id_sem, &semPost, 1);
+		semop(id_sem, &semPost, 1);
 	}
 	
 	//Imàj de la valeur smv [0], [1] ou [2], indique au processus parent que la voiture a terminé sa séance d'entrainement
 	if(p==1)
 	{
-		semaph(id_sem, &semWait1, 1);
-		semaph(id_sem, &semDo1, 1);
+		semop(id_sem, &semWait1, 1);
+		semop(id_sem, &semDo1, 1);
 		smv[0]++;
-		semaph(id_sem, &semPost1, 1);
+		semop(id_sem, &semPost1, 1);
 	}
 	else if(p==2)
 	{
-		semaph(id_sem, &semWait1, 1);
-		semaph(id_sem, &semDo1, 1);
+		semop(id_sem, &semWait1, 1);
+		semop(id_sem, &semDo1, 1);
 		smv[1]++;
-		semaph(id_sem, &semPost1, 1);
+		semop(id_sem, &semPost1, 1);
 	}
 	else
 	{
-		semaph(id_sem, &semWait1, 1);
-		semaph(id_sem, &semDo1, 1);
+		semop(id_sem, &semWait1, 1);
+		semop(id_sem, &semDo1, 1);
 		smv[2]++;
-		semaph(id_sem, &semPost1, 1);
+		semop(id_sem, &semPost1, 1);
 	}
 }
 

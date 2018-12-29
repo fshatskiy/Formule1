@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 
-void sortVoituresByCurrTemps(structTuture voituresCourse[])
+void triVoituresEnFctTemps(structTuture voituresCourse[])
 {
 	int i=0;
 	structTuture tmpTuture;
@@ -38,46 +38,46 @@ void sortVoituresByCurrTemps(structTuture voituresCourse[])
 
 void course(int index)
 {
-	id_sem = semaph(id_sem, &semWait, 1);
-	id_sem = semaph(id_sem, &semDo, 1);
-	id_sem = semaph(id_sem, &semPost, 1);
+	id_sem = semop(id_sem, &semWait, 1);
+	id_sem = semop(id_sem, &semDo, 1);
+	id_sem = semop(id_sem, &semPost, 1);
 	
 	while(voitures[index].isOut == 0 && voitures[index].numCircuit < nbrLapMax)
 	{
 		genereTempsS1(index);
 		if(voitures[index].topS1<smv[7])
 		{
-			id_sem = semaph(id_sem, &semWait1, 1);
-			id_sem = semaph(id_sem, &semDo1, 1);
+			id_sem = semop(id_sem, &semWait1, 1);
+			id_sem = semop(id_sem, &semDo1, 1);
 			smv[7] = voitures[index].topS1;
-			id_sem = semaph(id_sem, &semPost1, 1);
+			id_sem = semop(id_sem, &semPost1, 1);
 		}
 		genereTempsS2(index);
 		if(voitures[index].topS2<smv[8])
 		{
-			id_sem = semaph(id_sem, &semWait1, 1);
-			id_sem = semaph(id_sem, &semDo1, 1);
+			id_sem = semop(id_sem, &semWait1, 1);
+			id_sem = semop(id_sem, &semDo1, 1);
 			smv[8] = voitures[index].topS2;
-			id_sem = semaph(id_sem, &semPost1, 1);
+			id_sem = semop(id_sem, &semPost1, 1);
 		}
 		genereTempsS3(index);
 		if(voitures[index].topS3<smv[9])
 		{
-			id_sem = semaph(id_sem, &semWait1, 1);
-			id_sem = semaph(id_sem, &semDo1, 1);
+			id_sem = semop(id_sem, &semWait1, 1);
+			id_sem = semop(id_sem, &semDo1, 1);
 			smv[9] = voitures[index].topS3;
-			id_sem = semaph(id_sem, &semPost1, 1);
+			id_sem = semop(id_sem, &semPost1, 1);
 		}
 		if(voitures[index].topCircuit<smv[10])
 		{
-			id_sem = semaph(id_sem, &semWait1, 1);
-			id_sem = semaph(id_sem, &semDo1, 1);
+			id_sem = semop(id_sem, &semWait1, 1);
+			id_sem = semop(id_sem, &semDo1, 1);
 			smv[10] = voitures[index].topCircuit;
-			id_sem = semaph(id_sem, &semPost1, 1);
+			id_sem = semop(id_sem, &semPost1, 1);
 		}
-		id_sem = semaph(id_sem, &semWait, 1);
-		id_sem = semaph(id_sem, &semDo, 1);
-		id_sem = semaph(id_sem, &semPost, 1);
+		id_sem = semop(id_sem, &semWait, 1);
+		id_sem = semop(id_sem, &semDo, 1);
+		id_sem = semop(id_sem, &semPost, 1);
 		
 		if(voitures[index].isOut == 0)
 		{
@@ -85,10 +85,10 @@ void course(int index)
 		}
 	}
 	
-	id_sem = semaph(id_sem, &semWait1, 1);
-	id_sem = semaph(id_sem, &semDo1, 1);
+	id_sem = semop(id_sem, &semWait1, 1);
+	id_sem = semop(id_sem, &semDo1, 1);
 	smv[6]++;
-	id_sem = semaph(id_sem, &semPost1, 1);
+	id_sem = semop(id_sem, &semPost1, 1);
 	
 }
 

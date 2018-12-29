@@ -132,8 +132,8 @@ int isIn(int nom, int longueur, structTuture t[])
 
 void genereTempsS1(int i)
 {
-	semaph(id_sem, &semWait, 1);
-	semaph(id_sem, &semDo, 1);
+	semop(id_sem, &semWait, 1);
+	semop(id_sem, &semDo, 1);
 	double longueurPercent = 0.28; // longueur du secteur en pourcentage de la longueur totale du circuit
 	double temps;
 	
@@ -157,13 +157,13 @@ void genereTempsS1(int i)
 			voitures[i].topS1 = temps;
 		}
 	}
-	semaph(id_sem, &semPost, 1);
+	semop(id_sem, &semPost, 1);
 }
 
 void genereTempsS2(int i)
 {
-	semaph(id_sem, &semWait, 1);
-	semaph(id_sem, &semDo, 1);
+	semop(id_sem, &semWait, 1);
+	semop(id_sem, &semDo, 1);
 	double longueurPercent = 0.33; //longueur du secteur en pourcentage de la longueur totale du circuit
 	double temps;
 	
@@ -183,15 +183,15 @@ void genereTempsS2(int i)
 			voitures[i].topS2 = temps;
 		}
 	}
-	semaph(id_sem, &semPost, 1);
+	semop(id_sem, &semPost, 1);
 	//	printf("2 %d", i);
 	//	sleep(1);
 }
 
 void genereTempsS3(int i)
 {
-	semaph(id_sem, &semWait, 1);
-	semaph(id_sem, &semDo, 1);
+	semop(id_sem, &semWait, 1);
+	semop(id_sem, &semDo, 1);
 	double longueurPercent = 0.39; //longueur du secteur en pourcentage de la longueur totale du circuit
 	double temps;
 	
@@ -217,7 +217,7 @@ void genereTempsS3(int i)
 			voitures[i].topCircuit= voitures[i].currCircuit;
 		}
 	}
-	semaph(id_sem, &semPost, 1);
+	semop(id_sem, &semPost, 1);
 	//printf("3 %d", i);
 	sleep(1);
 }
@@ -250,10 +250,10 @@ void interaction(int i)
 	char c = demandeAction();
 	if(c=='c')
 	{
-		semaph(id_sem, &semWait1, 1);
-		semaph(id_sem, &semDo1, 1);
+		semop(id_sem, &semWait1, 1);
+		semop(id_sem, &semDo1, 1);
 		smv[i]=0;
-		semaph(id_sem, &semPost1, 1);
+		semop(id_sem, &semPost1, 1);
 	}
 	else
 	{
