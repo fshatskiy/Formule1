@@ -28,7 +28,7 @@ void worker(int nprocesses)
 	int pid;	//process id
 	isCourse = 0;
 	if(getpid()==pidList[0] && nprocesses==0) //=>process du parent (du père?) après que tout les forks soit fait
-		
+	{	
 		//debut du entrainement 1 (entrainement 1?)
 		//le processus parent dort jusqu'a ce que tout les enfants aient fini leurs entrainement (entrainement) 
 		structTuture tempo[20];
