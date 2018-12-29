@@ -34,7 +34,7 @@ void init(int i, int nom)
 		voituresQualif3[i].topS2=0;
 		voituresQualif3[i].topS3=0;
 		voituresQualif3[i].numCircuit=0;
-		voituresQualif3[i].currtemps=0;
+		voituresQualif3[i].currTemps=0;
 		voituresQualif3[i].currCircuit=0;
 		voituresQualif3[i].inStand=0;
 		voituresQualif3[i].isOut=0;

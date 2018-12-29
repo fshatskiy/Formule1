@@ -290,7 +290,7 @@ void sortCourse(structTuture voituresQualif[], int sizeArrayVoitures)
 	for(i=0; i < sizeArrayVoitures; i++)
 		//Remplir le cas i du tableau
 	{
-		for(j = i+1; j < sizeArrayvoitures; j++)
+		for(j = i+1; j < sizeArrayVoitures; j++)
 			//Vérifiez s'il n'y a pas de plus petit nombre dans les cas suivants
 		{
 			if((voituresQualif[j].currTemps < voituresQualif[i].currTemps)&&(voituresQualif[j].isOut==0))

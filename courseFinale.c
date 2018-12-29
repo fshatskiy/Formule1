@@ -276,8 +276,6 @@ void worker(int nprocesses)
 		printf("\n\nLa course est finie, nous espérons que vous vous êtes bien amusés !\n");
 		
 	}
-	
-	
 	if(nprocesses > 0) //toutes les forks ne sont pas encore finies
 	{
 		if ((pid = fork()) < 0)
@@ -424,10 +422,10 @@ int main(int argc, char *argv[])
 	//Ici on débute l'interaction avec l'utilisateur en lui demandant de choisir la longueurueur du tour. 
 	int km; // en kilomètres
 	char s[100];
-	puts("Welcome to this weekend Formula One GP!");
+	puts("Nous vous souhaitons la bienvenue pour cette fameuse course de F1 tant attendue");
 	do
 	{
-		puts("Entrez la longueurueur du tour en km");
+		puts("Entrez la longueur du tour en km");
 		puts("Ce nombre doit être entre 1 et 7");
 		
 		if (fgets(s, 100, stdin) == NULL)
