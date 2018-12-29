@@ -46,7 +46,7 @@ int genereRandom(int min_number, int max_number){
 int pitStop(int i) {
 	int tempsStop = 0; //temps passé au pit
 	
-	// 15% chance of a pit stop
+	// 15% chance du pit stop
 	if (genereRandom(0, 99) > 84) {
 		voitures[i].inStand ++; //incrémente le nombre de pitstop
 		tempsStop += (genereRandom(24, 40)/10.0);
@@ -115,7 +115,7 @@ int indexOf(int i, int longueur, int t[])
 	//si le pid n'est pas dans l'onglet, nous renvoyons la longueur de l'onglet pour permettre la détection d'erreur
 	return longueur;
 }
-
+//.h
 int isIn(int nom, int longueur, structTuture t[])
 {
 	int k=0;
@@ -184,8 +184,6 @@ void genereTempsS2(int i)
 		}
 	}
 	semop(id_sem, &semPost, 1);
-	//	printf("2 %d", i);
-	//	sleep(1);
 }
 
 void genereTempsS3(int i)
@@ -218,7 +216,6 @@ void genereTempsS3(int i)
 		}
 	}
 	semop(id_sem, &semPost, 1);
-	//printf("3 %d", i);
 	sleep(1);
 }
 
@@ -304,7 +301,7 @@ void sortCourse(structTuture voituresQualif[], int sizeArrayVoitures)
 	}
 }
 
-void ajouteTempsEnFctPosition()//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void ajouteTempsEnFctPosition()//en fct de la place de la voiture au début de la course, un temps est ajouté
 {
 	for (int j = 0; j < 20; j++)
 	{

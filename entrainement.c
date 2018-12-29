@@ -5,9 +5,9 @@
 #include <stdlib.h>
 
 //Valeurs de temps représentant la longueur des entrainements
-double temps1 = 100;//90 min
-double temps2 = 100;
-double temps3 = 100;//60 min
+double temps1 = 5400;//90 min
+double temps2 = 5400;
+double temps3 = 3600;//60 min
 
 void entrainement(int index, int p)
 {

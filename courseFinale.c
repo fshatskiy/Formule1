@@ -299,7 +299,7 @@ void worker(int nprocesses)
 			index = indexOf(getpid(), 21, pidList);//index-1 = index of the tuture
 			semop(id_sem, &semPost2, 1);
 			
-			//Mise en place de la graine pour le générateur aléatoire pour que chaque process ait une différente///////////////////////////////////////////////
+			//Mise en place de la graine pour le générateur aléatoire pour que chaque process ait une différente
 			srand(time(NULL)+getpid());
 			
 			if(index==21 || index==0)

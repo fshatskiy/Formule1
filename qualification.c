@@ -16,7 +16,7 @@ void triVoitures(structTuture voituresQualif[], int sizeArrayVoitures)
 	int j = 0;
 	//Compare les voitures entre elles (1 avec 1, 1 avec 2, etc)
 	for(i=0; i < sizeArrayVoitures; i++)
-		//Remplit le i du tableau /////////////////////////////////// ?? 
+		//Remplit le i du tableau 
 	{
 		for(j = i+1; j < sizeArrayVoitures; j++)
 			//Vérifie s'il n'y a pas de nb plus petits dans le cas suivant   PQ
