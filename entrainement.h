@@ -6,7 +6,7 @@
 /*
  * Lance l'entrainement sur la voiture située dans voitures[index]
  * @pre : index de la voitures, p==1 || p==2 || p==3 ---> entrainements
- * @post : modifie les valeurs de la strucutre voitures
+ * @post : modifie les valeurs de la structure voitures
  */
 void entrainement(int index, int p);
 
