@@ -160,7 +160,7 @@ void genereTempsS3(int i);
 char demandeAction();
 
 /*
- * Cette fonction gère l'interaction avec l'utilisateur et le meurtre des enfants si nécessaire. 
+ * Cette fonction gère l'interaction avec l'utilisateur et la fin de vie des enfants si nécessaire. 
  * i est l'indice de la variable à réinitialiser.
  * @pre:/
  * @post : si l'utilisateur veut arrêter, il appelle alors le killchildren
