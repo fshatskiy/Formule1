@@ -81,7 +81,7 @@ void worker(int nprocesses)
 			sleep(1);
 		}
 
-		//ici, toutes les voitures on fini le entrainement donc on génère le fichier recap.
+		//ici, toutes les voitures ont fini l'entrainement donc on génère le fichier recap.
 		semop(id_sem, &semWait, 1);
 		semop(id_sem, &semDo, 1);
 		genereRecapEntrainementFile();
@@ -113,7 +113,7 @@ void worker(int nprocesses)
 			sleep(1);
 		}
 
-		//ici, toutes les voitures on fini le entrainement donc on génère le fichier recap.
+		//ici, toutes les voitures ont fini l'entrainement donc on génère le fichier recap.
 		semop(id_sem, &semWait, 1);
 		semop(id_sem, &semDo, 1);
 		genereRecapEntrainementFile();
@@ -155,7 +155,7 @@ void worker(int nprocesses)
 		triVoitures(tempo, 20);
 		buildStartPosition(tempo, 1);
 
-		//ici, toutes les voitures on fini le entrainement donc on génère le fichier recap.
+		//ici, toutes les voitures ont fini l'entrainement donc on génère le fichier recap.
 		semop(id_sem, &semWait, 1);
 		semop(id_sem, &semDo, 1);
 		genereRecapQualifFile();
@@ -195,7 +195,7 @@ void worker(int nprocesses)
 		triVoitures(voituresQualif2, 15);
 		buildStartPosition(voituresQualif2, 2);
 
-		//ici, toutes les voitures on fini le entrainement donc on génère le fichier recap.
+		//ici, toutes les voitures ont fini l'entrainement donc on génère le fichier recap.
 		semop(id_sem, &semWait, 1);
 		semop(id_sem, &semDo, 1);
 		genereRecapQualifFile();
@@ -234,7 +234,7 @@ void worker(int nprocesses)
 		triVoitures(voituresQualif3, 10);
 		buildStartPosition(voituresQualif3, 3);
 
-		//ici, toutes les voitures on fini le entrainement donc on génère le fichier recap.
+		//ici, toutes les voitures ont fini l'entrainement donc on génère le fichier recap.
 		semop(id_sem, &semWait, 1);
 		semop(id_sem, &semDo, 1);
 		genereRecapQualifFile();
@@ -267,7 +267,7 @@ void worker(int nprocesses)
 			sleep(1);
 		}
 
-		//ici, toutes les voitures on fini le entrainement donc on génère le fichier recap.
+		//ici, toutes les voitures ont fini l'entrainement donc on génère le fichier recap.
 		semop(id_sem, &semWait, 1);
 		semop(id_sem, &semDo, 1);
 		genereRecapCourseFile();
@@ -310,7 +310,7 @@ void worker(int nprocesses)
 			}
 
 			entrainement(index-1, 1);
-			//attend que les autres ait fini et que les processus parents aient fini (d'imprimer 'd'ecrire)
+			//attend que les autres aient fini et que les processus parents aient fini (d'imprimer 'd'ecrire)
 			//le fichier recap;
 			while(smv[0]!=0)
 			{
@@ -319,7 +319,7 @@ void worker(int nprocesses)
 
 			//debut du entrainement 2 (entrainement 2?)
 			entrainement(index-1, 2);
-			//attends que les autres ait fini et que les processus parents aient fini (d'imprimer 'd'ecrire)
+			//attends que les autres aient fini et que les processus parents aient fini (d'imprimer 'd'ecrire)
 			//le fichier recap;
 			while(smv[1]!=0)
 			{
@@ -328,7 +328,7 @@ void worker(int nprocesses)
 
 			//debut du entrainement 3 (entrainement 3?)
 			entrainement(index-1, 3);
-			//attends que les autres ait fini et que les processus parents aient fini (d'imprimer 'd'ecrire)
+			//attends que les autres aient fini et que les processus parents aient fini (d'imprimer 'd'ecrire)
 			//le fichier recap;
 			while(smv[2]!=0)
 			{
@@ -337,7 +337,7 @@ void worker(int nprocesses)
 
 			//Debut des qualif 1
 			qualif(index-1, 1);
-			//attend que les autres ait fini et que les processus parents aient fini (d'imprimer 'd'ecrire)
+			//attend que les autres aient fini et que les processus parents aient fini (d'imprimer 'd'ecrire)
 			//le fichier recap;
 			while(smv[3]!=0)
 			{
@@ -346,7 +346,7 @@ void worker(int nprocesses)
 
 			//Debut des qualif 2
 			qualif(index-1, 2);
-			//attend que les autres ait fini et que les processus parents aient fini (d'imprimer 'd'ecrire)
+			//attend que les autres aient fini et que les processus parents aient fini (d'imprimer 'd'ecrire)
 			//le fichier recap;
 			while(smv[4]!=0)
 			{
@@ -355,7 +355,7 @@ void worker(int nprocesses)
 
 			//Debut des qualif 3
 			qualif(index-1, 3);
-			//attend que les autres ait fini et que les processus parents aient fini (d'imprimer 'd'ecrire)
+			//attend que les autres aient fini et que les processus parents aient fini (d'imprimer 'd'ecrire)
 			//le fichier recap;
 			while(smv[5]!=0)
 			{
@@ -369,7 +369,7 @@ void worker(int nprocesses)
 			exit(0);
 
 		}
-		else if(pid > 0)//=>parent process while the forks aren't all done
+		else if(pid > 0)//=>process parent pdt que les foks travaillent
 		{
 			//enregistrer le pid de l'enfant qui vient d'être créé dans pidList puis appelle le travailleur avec un nombre réduit pour forker l'enfant suivant
 			semop(id_sem, &semWait2, 1);
@@ -408,7 +408,7 @@ int main(int argc, char *argv[])
 
 	//Création de mémoires partagées dont nous avions besoin (1 pour les voitures, 1 pour les variables dont nous avions besoin
 	//et 1 pour la pidList)
-	int id_shm = shmget(key, sizeof(tempo), IPC_CREAT|0666); //autorisation 0666??
+	int id_shm = shmget(key, sizeof(tempo), IPC_CREAT|0666); //autorisation 
 	int id_shm1 = shmget(key1, sizeof(tempo1), IPC_CREAT|0666);
 	int id_shm2 = shmget(key2, sizeof(tempo2), IPC_CREAT|0666);
 	int id_shm3 = shmget(key3, sizeof(tempo3), IPC_CREAT|0666);
