@@ -4,7 +4,7 @@
 #include "voiture.h"
 
 /*
- * Trie la table Voitures sur base du temps actuel et du num du tour
+ * Trie la table Voitures sur base du temps actuel et du nb du tour
  * @pre : voituresCourse not null
  * @post : modifie voituresCourse
  */
